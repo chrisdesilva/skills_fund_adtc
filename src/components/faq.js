@@ -29,7 +29,7 @@ const FAQ = () => {
                <ul className="mb-0 pb-4">
                     {faq.loanRange.map(program => {
                          return <li>
-                              <strong>For {program.programName},</strong> you may borrow from $2,000 up to {program.maxAmount} for tuition. {program.col ? <span>You may also borrow up to {program.colAmount} for cost of living.</span> : <span>Cost of living is not available for this program.</span>}
+                              You may borrow from $2,000 up to $7,500 for tuition. You may also borrow up to $2,500 for tools.
                          </li>
                     })}
                </ul>

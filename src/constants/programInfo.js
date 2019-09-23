@@ -1,4 +1,4 @@
-import logo from "../images/logo_placeholder.png" // add school logo to images folder and import here
+import logo from "../images/logo_adtc.webp" // add school logo to images folder and import here
 
 export const applicationsLive = true // set to false if not currently accepting applications
 export const disabledLoanAppFormID = '69140c47-bb03-4a1b-b674-cc136fdea23d' // Hubspot ID for all disabled apply now lead captures
@@ -9,8 +9,8 @@ export const nextCohortStartDate = 'October 29, 2019'
 export const schoolInfo = { // term details section
     interestRate36: '8.99%',
     interestRate60: '10.99%',
-    APRRange36: 'XX.XX - XX.XX%',
-    APRRange60: 'XX.XX - XX.XX%',
+    APRRange36: '11.69%',
+    APRRange60: '12.71%',
     interestOnly: [
         { // for multiple examples of interest only, add items to interestOnly array
             programName: 'PROGRAM NAME',
@@ -30,16 +30,16 @@ export const schoolInfo = { // term details section
     ],
     immediateRepayment: [
         { // for multiple examples of immmediate repayment, add items to immediateRepayment array
-            programName: 'PROGRAM NAME',
-            APR36: 'XX.XX%',
-            financeCharge36: '$X,XXX.XX',
-            FullMonthlyPayment36: '$XXX.XX',
-            APR60: 'XX.XX%',
-            financeCharge60: '$X,XXX.XX',
-            FullMonthlyPayment60: '$XXX.XX',
-            LoanExampleAmt: '$10,000',
-            LoanExampleOFeeAmt: '$400',
-            LoanExampleAmtPlusOFee: '$10,400'
+            programName: '',
+            APR36: '11.69%',
+            financeCharge36: '$1,428.06',
+            FullMonthlyPayment36: '$248.00',
+            APR60: '12.71%',
+            financeCharge60: '$2,673.12',
+            FullMonthlyPayment60: '$169.55',
+            LoanExampleAmt: '$7,500',
+            LoanExampleOFeeAmt: '$300',
+            LoanExampleAmtPlusOFee: '$7,800'
         }
     ]
 }
@@ -47,12 +47,12 @@ export const schoolInfo = { // term details section
 export const faq = { // faq section
     costOfLiving: false, // true if at least one program has cost of living included
     costOfLivingPrograms: '', // leave as empty string is cost of living availability is the same across all programs
-    multCostOfLivingPrograms: true, // true if costOfLivingPrograms string has more than one program
-    interestOnly: true, // true if interest-only payments are an option
+    multCostOfLivingPrograms: false, // true if costOfLivingPrograms string has more than one program
+    interestOnly: false, // true if interest-only payments are an option
     immediateRepayment: true, // true if immediate repayment is an option
     multipleLoanLengths: true, // true if 36 and 60 month options are both available
-    multipleLoanTypes: true, // true if both IR and IO are available
-    multiPrograms: true, // only true if there are multiple programs
+    multipleLoanTypes: false, // true if both IR and IO are available
+    multiPrograms: false, // only true if there are multiple programs
     onlinePrograms: false, // true if at least one program is remote/online
     schoolHQState: 'WA',
     origFee: 0.04,
@@ -71,15 +71,9 @@ export const faq = { // faq section
         {
             programName: "PROGRAM 1",
             maxAmount: "the max loan amount",
-            col: true,
-            colAmount: "$6,000"
-        },
-        {
-            programName: "PROGRAM 2",
-            maxAmount: "$10,750",
             col: false,
             colAmount: "$6,000"
-        },
+        }
     ]
 }
 
@@ -89,35 +83,35 @@ export const faq = { // faq section
 
 export const schoolLogo = logo // go to header.js if height needs adjustment
 
-export const schoolName = "SCHOOL_NAME"
+export const schoolName = "ADTC"
 
-export const schoolURL = 'https://www.SCHOOLWEBSITE.com/' // update with url of school's website
+export const schoolURL = 'https://www.americandieseltraining.com/' // update with url of school's website
 
-export const skfURL = 'https://SCHOOLNAME.skills.fund' // update with Skills Fund url
+export const skfURL = 'https://adtc.skills.fund' // update with Skills Fund url
 
-export const headline = "Learn to Code at SCHOOL NAME" // update headline as appropriate
+export const headline = "Become a Mechanic with Training from ADTC" // update headline as appropriate
 
 export const leadContent = {
     header: "Your last step on the path toward changing your career",
-    paragraph: `${schoolName} designs its programs to cover multiple stacks of programming languages to help graduates develop a diverse skill-set. ${schoolName} partners with Skills Fund to offer tuition${faq.costOfLiving ? ' and cost of living' : ''} financing so more students like you can access their program.`
+    paragraph: `${schoolName} designs its programs to help students start a career as a diesel mechanic. ${schoolName} partners with Skills Fund to offer tuition${faq.costOfLiving ? ' and cost of living' : ''} financing so more students like you can access their program.`
 }
 
 export const threeStepCardText = {
     step1: "",
     step2: {
-        header: "select your program",
-        text: "Choose between the Onsite Bootcamp, Online Full-Time Bootcamp, and Online Part-Time Bootcamp programs."
+        header: "select your location",
+        text: "ADTC offers programs in Columbus, Cincinnati, Dallas, Flint, Kansas City, Charleston, Pompano Beach, Pittsburgh, and Grand Rapids."
     },
-    step3: `You'll be on your way to an exciting career in tech as part of ${schoolName}'s powerful network.`
+    step3: `You'll be on your way to an exciting career as a Diesel Mechanic.`
 }
 
-export const netlifyFormName = 'SCHOOLNAME_contact'
+export const netlifyFormName = 'ADTC_contact'
 
 export const GATracking = 'UA-68312423-1'
 
-export const hubspotFormId = "HUBSPOT_FORM_ID" // create Hubspot form, get form id after publishing
+export const hubspotFormId = "f5e4d7d1-62f9-4df3-ab56-605c1710af90" // create Hubspot form, get form id after publishing
 
-export const selectAProgram = "select_a_SCHOOLNAME_program" // update school name to match form field on Hubspot, *** change to "program_name" if only one program ***"
+export const selectAProgram = "program_name" // update school name to match form field on Hubspot, *** change to "program_name" if only one program ***"
 
 // ***** END GENERAL SCHOOL INFO ***** 
 
@@ -134,20 +128,19 @@ export const moreThanSixPrograms = false // set to true if there are 7 or more p
 
 export const programLoanInfo = [ // update with program names and corresponding loan URLs with market segment code from Master Loan Parameters
     {
-        name: "Program 1",
-        url: "https://sf.privateloan.studentloan.org/external/LoanApplication.do?lenderCode=LENDERCODE1",
+        name: "ADTC",
+        url: "https://sf.privateloan.studentloan.org/external/LoanApplication.do?lenderCode=SKADTC17",
         loanInfo: { // match loanInfo in first metro below
-            maxLoanAmt: 19495,
+            maxLoanAmt: 10000,
             loanTerm36: true,
             loanTerm60: true,
-            '0': { // interest-only 
-                k: 5, 
-                apr36: 11.16, 
-                apr60: 12.51
-            },
-            '1': null // immediate repayment
+            '0': null,
+            '1': {
+              apr36: 11.69,
+              apr60: 12.71
+            }
         },
-        defaultLoanType: "0", // leave at 0 for interest-only, set to 1 for immediate repayment
+        defaultLoanType: "1", // leave at 0 for interest-only, set to 1 for immediate repayment
         showMetros: false, // true if there are multiple metros with different tuition amounts for the same program
         showLoanTypes: false, // true if both IR and IO are available
         locations: ["Metro 1", "Metro 2", "Metro 3"],
@@ -155,15 +148,14 @@ export const programLoanInfo = [ // update with program names and corresponding 
           {
             location: "Metro 1",
             loanInfo: { // // match loanInfo to Program 1 above
-              maxLoanAmt: 19495,
+              maxLoanAmt: 10000,
               loanTerm36: true,
               loanTerm60: true,
-              '0': { 
-                  k: 5, 
-                  apr36: 11.16, 
-                  apr60: 12.51
-              },
-              '1': null
+              '0': null,
+              '1': {
+                apr36: 11.69,
+                apr60: 12.71
+              }
             }
           },
           {
@@ -323,7 +315,7 @@ export const programLoanInfo = [ // update with program names and corresponding 
 ]
 
 // ***** BEGIN LOAN CALC TEXT INFO *****
-export const programMaxText = "Choose the loan amount that works best for you. Borrow up to your metro's max (see table below) for the PROGRAM 1, up to $14,995 for the PROGRAM 2 Bootcamp tuition, and up to $9,995 for the PROGRAM 3 Bootcamp tuition."
+export const programMaxText = "Choose the loan amount that works best for you. Borrow up to $7,500 for tuition and up to $2,500 for tools."
 
 export const paymentTable = {
     headers: ["Program", "Tuition", "Cost of Living", "Max Total"],

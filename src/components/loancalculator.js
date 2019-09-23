@@ -18,7 +18,7 @@ const LoanCalculator = () => {
     const minLoanAmt = 2000
     const [interestPayment, setInterestPayment] = useState({ payment36: null, payment60: null })
     const [monthlyPayment, setMonthlyPayment] = useState({ payment36: null, payment60: null })
-    const [loanType, setLoanType] = useState('0') // default to 0 for interest-only, 1 for immediate repayment
+    const [loanType, setLoanType] = useState(programLoanInfo[0]['defaultLoanType']) // default to 0 for interest-only, 1 for immediate repayment
     const [multiMetros, showMetros] = useState(programLoanInfo[0].showMetros) // shows metro dropdown
     const [loanTypes, showLoanTypes] = useState(programLoanInfo[0].showLoanTypes) // shows IR/IO dropdown
     const [metros, setMetros] = useState(programLoanInfo[0].locations) || useState(null)
@@ -179,11 +179,7 @@ const calculateUpdatedAmount = () => {
                                         }
                                         <div className="flex flex-col items-center">
                                             <h4 className="border-primary border-b text-center font-normal mx-5 mb-3">Full Payment Period</h4>
-                                            {loanAmount > minLoanAmt && loanAmount < loanInformation.maxLoanAmt ?
                                                     <p className="text-primary text-2xl mb-0">${monthlyPayment.payment36}</p>
-                                                        :
-                                                    <p className="text-primary text-2xl mb-0">--</p>
-                                                }
                                             <p className="text-xs">per month</p>
                                         </div>
                                     </div>
@@ -212,11 +208,7 @@ const calculateUpdatedAmount = () => {
                                         }
                                         <div className="flex flex-col items-center">
                                             <h4 className="border-primary border-b text-center font-normal mx-5 mb-3">Full Payment Period</h4>
-                                            {loanAmount > minLoanAmt && loanAmount < loanInformation.maxLoanAmt ?
                                                     <p className="text-primary text-2xl mb-0">${monthlyPayment.payment60}</p>
-                                                        :
-                                                    <p className="text-primary text-2xl mb-0">--</p>
-                                                }
                                             <p className="text-xs">per month</p>
                                         </div>
                                     </div>
