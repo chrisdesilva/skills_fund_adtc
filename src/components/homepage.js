@@ -17,7 +17,7 @@ import TermInfo from './terminfo'
 import FAQ from './faq'
 import Eligibility from './eligibility'
 import ContactForm from './contactform'
-import { applicationsLive } from '../constants/programInfo'
+import { applicationsLive, schoolName } from '../constants/programInfo'
 
 
 class Homepage extends React.Component {
