@@ -4,11 +4,11 @@ import { UnmountClosed as Collapse } from "react-collapse"
 import { faq, schoolName } from "../constants/programInfo"
 
 // update with school-specific info
-const FAQ = () => {
+const FAQ = React.forwardRef((props, ref) => {
   const [q1, showq1] = useState(false)
   const [q2, showq2] = useState(false)
   const [q3, showq3] = useState(false)
-  const [q4, showq4] = useState(false)
+  const [q4, showq4] = useState(true)
   const [q5, showq5] = useState(false)
   const [q6, showq6] = useState(false)
   const [q7, showq7] = useState(false)
@@ -19,10 +19,10 @@ const FAQ = () => {
   const [q12, showq12] = useState(false)
 
   return (
-    <div className="mx-2 lg:mx-10 p-8 shadow rounded">
+    <div ref={ref} className="mx-2 lg:mx-10 p-8 shadow rounded">
       <h2 className="py-4 text-center">Frequently Asked Questions</h2>
 
-      <div onClick={() => showq1(!q1)}>
+      {/* <div onClick={() => showq1(!q1)}>
         <h3 className="text-lg text-lg uppercase text-primary flex items-center cursor-pointer">
           <span className="text-sm">
             <FaAngleDown />
@@ -65,7 +65,7 @@ const FAQ = () => {
             deposit directly to <strong>{schoolName}</strong>.
           </p>
         )}
-      </Collapse>
+      </Collapse> */}
 
       <div onClick={() => showq2(!q2)}>
         <h3 className="text-lg text-lg uppercase text-primary flex items-center cursor-pointer">
@@ -104,7 +104,7 @@ const FAQ = () => {
         </p>
       </Collapse>
 
-      {faq.costOfLiving && (
+      {/* {faq.costOfLiving && (
         <>
           <div onClick={() => showq3(!q3)}>
             <h3 className="text-lg uppercase text-primary flex items-center cursor-pointer">
@@ -146,7 +146,7 @@ const FAQ = () => {
             </p>
           </Collapse>
         </>
-      )}
+      )} */}
 
       <div onClick={() => showq4(!q4)}>
         <h3 className="text-lg uppercase text-primary flex items-center cursor-pointer">
@@ -326,7 +326,7 @@ const FAQ = () => {
         </p>
       </Collapse> */}
 
-      <div onClick={() => showq7(!q7)}>
+      {/* <div onClick={() => showq7(!q7)}>
         <h3 className="text-lg uppercase text-primary flex items-center cursor-pointer">
           <span className="text-sm">
             <FaAngleDown />
@@ -354,9 +354,9 @@ const FAQ = () => {
             here.
           </a>
         </p>
-      </Collapse>
+      </Collapse> */}
 
-      <div onClick={() => showq8(!q8)}>
+      {/* <div onClick={() => showq8(!q8)}>
         <h3 className="text-lg uppercase text-primary flex items-center cursor-pointer">
           <span className="text-sm">
             <FaAngleDown />
@@ -389,9 +389,9 @@ const FAQ = () => {
           additional funds, should you not be awarded your scholarship, as loans
           may not be upward adjusted.
         </p>
-      </Collapse>
+      </Collapse> */}
 
-      <div onClick={() => showq9(!q9)}>
+      {/* <div onClick={() => showq9(!q9)}>
         <h3 className="text-lg uppercase text-primary flex items-center cursor-pointer">
           <span className="text-sm">
             <FaAngleDown />
@@ -406,10 +406,7 @@ const FAQ = () => {
           credit health. In some cases, adding a cosigner can improve your
           interest rate. If you are concerned about your credit health, consider
           adding a cosigner with strong credit health to potentially improve
-          your interest rate. Additionally, a student who is not a U.S. citizen
-          or U.S. permanent resident or has Deferred Action for Childhood
-          Arrival (DACA) status may apply with a creditworthy cosigner who is a
-          U.S. citizen or U.S. permanent resident.
+          your interest rate.
         </p>
         {/* <p className="mb-0 pb-4">
           Learn more about our{" "}
@@ -431,10 +428,10 @@ const FAQ = () => {
           >
             finding the right cosigner.
           </a>
-        </p> */}
-      </Collapse>
+        </p> 
+      </Collapse> */}
 
-      <div onClick={() => showq10(!q10)}>
+      {/* <div onClick={() => showq10(!q10)}>
         <h3 className="text-lg uppercase text-primary flex items-center cursor-pointer">
           <span className="text-sm">
             <FaAngleDown />
@@ -448,9 +445,9 @@ const FAQ = () => {
           cohort must begin within 90 days of the date that you apply for a
           loan.
         </p>
-      </Collapse>
+      </Collapse> */}
 
-      <div onClick={() => showq11(!q11)}>
+      {/* <div onClick={() => showq11(!q11)}>
         <h3 className="text-lg uppercase text-primary flex items-center cursor-pointer">
           <span className="text-sm">
             <FaAngleDown />
@@ -477,9 +474,9 @@ const FAQ = () => {
           <li>Current income (not a factor in credit decision)</li>
           <li>Current employment status (not a factor in credit decision)</li>
         </ul>
-      </Collapse>
+      </Collapse> */}
 
-      <div onClick={() => showq12(!q12)}>
+      {/* <div onClick={() => showq12(!q12)}>
         <h3 className="text-lg uppercase text-primary flex items-center cursor-pointer">
           <span className="text-sm">
             <FaAngleDown />
@@ -502,7 +499,7 @@ const FAQ = () => {
           </a>{" "}
           today.
         </p>
-      </Collapse>
+      </Collapse> */}
 
       <p className="text-left lg:text-center">
         For other general questions about Skills Fund financing, please visit
@@ -519,6 +516,6 @@ const FAQ = () => {
       </p>
     </div>
   )
-}
+})
 
 export default FAQ

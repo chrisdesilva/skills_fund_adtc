@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
-import ReactGA from "react-ga"
+// import ReactGA from 'react-ga'
 import ReactPixel from "react-facebook-pixel"
 import marching from "../images/PeopleMarchColor.png"
 import { UnmountClosed as Collapse } from "react-collapse"
 import {
   faq,
   hubspotFormId,
+  moreThanSixPrograms,
   programLoanInfo,
   schoolName,
   selectAProgram,
@@ -19,47 +20,122 @@ const LoanApp = React.forwardRef((props, ref) => {
   const [loanUrl, setLoanUrl] = useState(programLoanInfo[0].url)
   const [programName, setProgramName] = useState(programLoanInfo[0].name)
   const [activeIndex, setActiveIndex] = useState(0) // takes in index of program to execute setActive hook
-  const queryParams = programLoanInfo.map(program => program.queryParams)
+  const [active, setActive] = useState(null) // sets individual programs as active or inactive to change highlight color
+  const activeClass =
+    "menu-item cursor-pointer border-2 rounded border-black text-center py-2 mb-2 bg-primary text-white"
+  const inactiveClass =
+    "menu-item cursor-pointer border-2 rounded border-black text-center py-2 mb-2"
   const formName = `${props.schoolName}_apply_now program-apply flex flex-col items-center`
   const costOfLiving = faq.costOfLiving
+  const multiplePrograms = faq.multiPrograms
+  const onlinePrograms = faq.onlinePrograms
+  const schoolHQState = faq.schoolHQState
 
   const handleChange = e => {
     setEmail(e.target.value)
   }
 
+  const toggleIsActive = i => {
+    setLoanUrl(programLoanInfo[i]["url"])
+    setProgramName(programLoanInfo[i]["name"])
+    setActiveIndex(i)
+    switch (
+      activeIndex // accounts for up to 10 programs
+    ) {
+      case 0:
+        setActive({
+          0: !active,
+          1: false,
+          2: false,
+          3: false,
+          4: false,
+          5: false,
+        })
+        break
+      case 1:
+        setActive({
+          0: false,
+          1: !active,
+          2: false,
+          3: false,
+          4: false,
+          5: false,
+        })
+        break
+      case 2:
+        setActive({
+          0: false,
+          1: false,
+          2: !active,
+          3: false,
+          4: false,
+          5: false,
+        })
+        break
+      case 3:
+        setActive({
+          0: false,
+          1: false,
+          2: false,
+          3: !active,
+          4: false,
+          5: false,
+        })
+        break
+      case 4:
+        setActive({
+          0: false,
+          1: false,
+          2: false,
+          3: false,
+          4: !active,
+          5: false,
+        })
+        break
+      case 5:
+        setActive({
+          0: false,
+          1: false,
+          2: false,
+          3: false,
+          4: false,
+          5: !active,
+        })
+        break
+      default:
+        setActive({
+          0: !active,
+          1: false,
+          2: false,
+          3: false,
+          4: false,
+          5: false,
+        })
+        break
+    }
+  }
+
   const toggleIsActiveDropdown = e => {
-    setActiveIndex(Number(e.target.value))
+    let program = e.target.value
+    setActiveIndex(program)
   }
 
   useEffect(() => {
-    if (queryParams.indexOf(props.location) !== -1) {
-      setActiveIndex(queryParams.indexOf(props.location)) // read query params in url, set default value of select based on index of program
-      setLoanUrl(programLoanInfo[activeIndex]["url"])
-      setProgramName(programLoanInfo[activeIndex]["name"])
-      console.log(programLoanInfo[activeIndex])
-    }
-  }, [])
-
-  useEffect(
-    // this effect allows url to update after intial load if student selects a different program
-    () => {
-      setLoanUrl(programLoanInfo[activeIndex]["url"])
-      setProgramName(programLoanInfo[activeIndex]["name"])
-    },
-    [activeIndex]
-  )
+    setLoanUrl(programLoanInfo[activeIndex]["url"])
+    setProgramName(programLoanInfo[activeIndex]["name"])
+  }, [activeIndex])
 
   const redirectLoanApp = () => {
     window.open(loanUrl, "_blank", "noopener noreferrer")
   }
 
-  const trackGoogleAnalyticsEvent = () => {
-    ReactGA.event({
-      category: `Apply Now Button | ${schoolName}`,
-      action: "click",
-      label: "submitted loan application",
-    })
-  }
+  // const trackGoogleAnalyticsEvent = () => {
+  //         ReactGA.event({
+  //             category: `Apply Now Button | ${schoolName}`,
+  //             action: 'click',
+  //             label: 'submitted loan application'
+  //         })
+  // }
 
   const trackFacebookPixel = () => {
     ReactPixel.track("InitiateCheckout", {
@@ -127,7 +203,7 @@ const LoanApp = React.forwardRef((props, ref) => {
       .then(response => console.log("success", response))
       .catch(error => console.log("error: ", error))
 
-    trackGoogleAnalyticsEvent()
+    // trackGoogleAnalyticsEvent()
     trackFacebookPixel()
     redirectLoanApp()
     isSubmitted(true)
@@ -136,9 +212,9 @@ const LoanApp = React.forwardRef((props, ref) => {
   return (
     <div
       ref={ref}
-      className="flex flex-col items-center justify-center pt-8 bg-primary"
+      className="flex flex-col items-center justify-center pt-8 mx-2 lg:mx-10 rounded shadow-xl bg-purple-150"
     >
-      <h2 className="text-white">Loan Application</h2>
+      <h2>Loan Application</h2>
       <div className="rounded shadow-2xl pt-8 px-8 mx-4 bg-white">
         {/* update with school name, remove cost of living if school does not offer it */}
         <h3 className="text-center font-normal">
@@ -155,36 +231,86 @@ const LoanApp = React.forwardRef((props, ref) => {
         </div>
         {/* update form fields as necessary */}
         <form className={formName} onSubmit={handleSubmit}>
-          <div className="w-full lg:w-64 px-8 lg:px-0">
-            <label htmlFor="email">Email address</label>
-            <input
-              className="border-2 rounded border-black text-center py-2 mb-4 w-64"
-              type="email"
-              name="email"
-              placeholder="Enter your email address"
-              onChange={handleChange}
-              value={email}
-              required
-            />
-            <p className="text-center text-sm mb-0">
-              Select your {props.schoolName} program
-            </p>
-            <select
-              id="programSelect"
-              className="border-2 border-primary mb-5 bg-white text-center w-full loanCalculator__selectInput"
-              onChange={toggleIsActiveDropdown}
-              value={activeIndex}
-            >
+          <label htmlFor="email">Email address</label>
+          <input
+            className="border-2 rounded border-primary text-center py-2 mb-4 w-64"
+            type="email"
+            name="email"
+            placeholder="Enter your email address"
+            onChange={handleChange}
+            value={email}
+            required
+          />
+          {multiplePrograms && !moreThanSixPrograms && (
+            <div className="w-full lg:w-64 px-8 lg:px-0">
+              <p className="text-center text-sm">
+                Select your {props.schoolName} program
+              </p>
               {programLoanInfo.map((program, i) => {
                 return (
-                  <option key={program.name} value={i}>
+                  <p
+                    key={program.name}
+                    className={activeIndex === i ? activeClass : inactiveClass}
+                    onClick={() => toggleIsActive(i)}
+                  >
                     {program.name}
-                  </option>
+                  </p>
                 )
               })}
-            </select>
+            </div>
+          )}
+          {multiplePrograms && moreThanSixPrograms && (
+            <div className="w-full lg:w-64 px-8 lg:px-0">
+              <p className="text-center text-sm">
+                Select your {props.schoolName} program
+              </p>
+              <select
+                id="programSelect"
+                className="border-2 border-primary mb-5 bg-white text-primary text-center w-full"
+                onChange={toggleIsActiveDropdown}
+              >
+                {programLoanInfo.map((program, i) => {
+                  return (
+                    <option key={program.name} value={i}>
+                      {program.name}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+          )}
+          <div className="hidden">
+            <input
+              type="text"
+              name="Stakeholder Type"
+              value="Student"
+              readOnly
+            />
+            <input
+              type="text"
+              name="Program Name"
+              value={programLoanInfo.programName}
+              readOnly
+            />
+            <input
+              type="text"
+              name="School"
+              value={props.schoolName}
+              readOnly
+            />
+            <input
+              type="text"
+              name="Student Loan Application Status"
+              value="BLA Click Email Submitted"
+              readOnly
+            />
+            <input
+              type="text"
+              name="Clicked Begin Loan Application BLA"
+              value="BLA Click"
+              readOnly
+            />
           </div>
-          {/* )} */}
           {submitted ? (
             <span className="pt-4 text-center">
               Thanks for applying! Your loan application has opened in a new
@@ -197,7 +323,7 @@ const LoanApp = React.forwardRef((props, ref) => {
             </span>
           ) : (
             <input
-              className="opacityApply uppercase bg-primary p-3 mb-4 w-48 rounded-full shadow-lg text-white cursor-pointer"
+              className="opacityApply uppercase bg-primary p-3 my-4 w-48 rounded-full shadow-lg text-white cursor-pointer"
               value="APPLY NOW"
               id="loanAppSubmitBtn"
               type="submit"
@@ -209,48 +335,17 @@ const LoanApp = React.forwardRef((props, ref) => {
               a new tab
             </p>
           )}
-          <div className="hidden h-0" id="hide">
-            <input
-              className="text-xs m-0 text-transparent"
-              type="text"
-              name="Stakeholder Type"
-              value="Student"
-              readOnly
-            />
-            <input
-              className="text-xs m-0 text-transparent"
-              type="text"
-              name="Program Name"
-              value={programLoanInfo.programName}
-              readOnly
-            />
-            <input
-              className="text-xs m-0 text-transparent"
-              type="text"
-              name="School"
-              value={props.schoolName}
-              readOnly
-            />
-            <input
-              className="text-xs m-0 text-transparent"
-              type="text"
-              name="Student Loan Application Status"
-              value="BLA Click Email Submitted"
-              readOnly
-            />
-            <input
-              className="text-xs m-0 text-transparent"
-              type="text"
-              name="Clicked Begin Loan Application BLA"
-              value="BLA Click"
-              readOnly
-            />
-          </div>
         </form>
       </div>
+      {/* {onlinePrograms && 
+                    <p className="m-0 text-base pt-8 px-4">
+                        <strong className="m-0">ATTENTION ONLINE STUDENTS: </strong>When entering "Applicant Information" within your loan application, <strong className="m-0">please select {schoolHQState} as "the state of the school you plan to attend."</strong>
+                    </p>
+                } */}
       <div className="px-8 text-sm">
+        {/* <p className="text-center pt-8">If you are a cosigner, begin the addendum now by clicking <a className="text-primary" href="https://sf.privateloan.studentloan.org/Cosigner.do?execution=e1s1" rel="noreferrer noopener" target="_blank">here</a>.</p> */}
         <p
-          className="text-center text-white underline cursor-pointer font-bold my-4"
+          className="text-center text-white my-4 cursor-pointer font-bold"
           onClick={() => toggleDisclaimers(!disclaimers)}
         >
           Disclaimers
@@ -281,12 +376,13 @@ const LoanApp = React.forwardRef((props, ref) => {
             </p>
             <p>Consent to share data:</p>
             <p>
-              By beginning the application, I consent under Federal and state
-              privacy laws to {props.schoolName} providing to Skills Fund
-              information related to my application, enrollment, and completion,
-              including but not limited to information contained in my original
-              application and supplements as well as information regarding my
-              completion, graduation, and post-program outcomes information.
+              By clicking the box below and beginning the application, I consent
+              under Federal and state privacy laws to NIMAA providing to Skills
+              Fund information related to my application, enrollment, and
+              completion, including but not limited to information contained in
+              my original application and supplements as well as information
+              regarding my completion, graduation, and post-program outcomes
+              information.
             </p>
             <p>
               <strong>While in the application, please note:</strong>

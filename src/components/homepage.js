@@ -7,7 +7,7 @@ import CookieBanner from "../components/cookieBanner"
 import Banner from "../components/banner"
 import LeadContent from "../components/leadcontent"
 import ThreeSteps from "../components/threesteps"
-import LoanCalculator from "../components/loancalculator"
+// import LoanCalculator from "../components/loancalculator"
 import InfoButtonContainer from "../components/infobuttoncontainer"
 import LoanApp from "./loanapp"
 import Reviews from "./reviews"
@@ -146,8 +146,8 @@ class Homepage extends React.Component {
               ref={this.threesteps}
             /> */}
         {/* <LoanCalculator /> */}
-        <LoanPreview onClick={this.scrollToApply} />
-        {applicationsLive ? (
+        {/* <LoanPreview onClick={this.scrollToApply} /> */}
+        {/* {applicationsLive ? (
           <LoanApp
             ref={this.apply}
             IP={this.props.IP}
@@ -161,7 +161,7 @@ class Homepage extends React.Component {
             pageUri={this.props.pageUri}
             schoolName={this.props.schoolName}
           />
-        )}
+        )} */}
         <Reviews />
         {/* <LeadCaptureForm IP={this.props.IP} pageUri={this.props.pageUri} schoolName={this.props.schoolName} /> */}
         <InfoButtonContainer
@@ -180,7 +180,7 @@ class Homepage extends React.Component {
           isOpened={this.state.faq}
           springConfig={{ stiffness: 150, damping: 40 }}
         >
-          <FAQ schoolName={this.props.schoolName} />
+          <FAQ schoolName={this.props.schoolName} ref={this.apply} />
         </Collapse>
         <Collapse
           isOpened={this.state.eligibility}
@@ -195,7 +195,7 @@ class Homepage extends React.Component {
           <ContactForm formName={this.props.formName} />
         </Collapse>
         <CookieBanner />
-        <ApplyFooter onClick={this.scrollToApply} IP={this.props.IP} />
+        {/* <ApplyFooter onClick={this.scrollToApply} IP={this.props.IP} /> */}
       </Layout>
     )
   }
